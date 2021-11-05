@@ -31,8 +31,8 @@ CONFIG.debug.hooks = CONFIG.debug.hooks || TH.debug.hooks;
 //  - a token is selected
 //  - the hotbar is changed
 
-// We use the updateUser hook
-//  - It's updated whenever the user updates their hotbar
+// We use the updateUser [updateDocument] hook
+//  - It's fired whenever the user updates their hotbar
 //  - It's not updated whenever the user views another page of their hotbar (unlike renderHotbar)
 //  - It's sent to other clients
 //  - There's no other hooks that contain the hotbar data that we need

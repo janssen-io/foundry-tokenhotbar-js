@@ -2,10 +2,12 @@ import { debug, TH } from '../lib/constants.mjs'
 
 /**
  *
- * @param {Token[]} controlledTokens
- * @param {User} user
- * @param {*} data
- * @returns {*} the saved Token Hotbar object
+ * @param {{ id: string}[]} controlledTokens
+ * @param {page: number} uiHotbar
+ * @param {{id: string, setFlag: function}} currentUser
+ * @param {{id: string, setFlag: function}} user
+ * @param {{hotbar: {}}} data
+ * @returns the saved Token Hotbar object
  */
 export function saveHotbar(controlledTokens, uiHotbar, currentUser, user, data) {
     if (!data.hotbar) {
