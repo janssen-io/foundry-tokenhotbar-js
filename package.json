@@ -2,7 +2,7 @@
   "name": "token-hotbar",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "type": "module",
   "scripts": {
     "test": "node spec/*.js"

@@ -1,10 +1,10 @@
-import { TH } from './lib/constants.mjs';
-import { saveHotbar } from './features';
+import { TH, log } from './lib/constants.mjs';
+import { saveHotbar } from './src/features.mjs';
 
 // class BarLoader {
 //     saveBar(page, document) { }
 
-//     loadBar(page, document) { } 
+//     loadBar(page, document) { }
 // }
 
 // class DocumentSelector {
@@ -22,11 +22,11 @@ import { saveHotbar } from './features';
 
 log("Module Loaded!");
 
-// So we don't have to enable it on reloads for now.
-// TODO: should probably remove this later.
-CONFIG.debug.hooks = TH.debug.hooks;
+// Auto-enable hooks so we don't need to do so manually when reloading while developing.
+// Do NOT disable the hooks if they were already enabled outside this module
+// TODO: should probably remove this later or move it to a setting.
+CONFIG.debug.hooks = CONFIG.debug.hooks || TH.debug.hooks;
 
-// Debug hooks if we are debugging
 // Let's save the hotbar whenever
 //  - a token is selected
 //  - the hotbar is changed
@@ -39,5 +39,5 @@ CONFIG.debug.hooks = TH.debug.hooks;
 
 Hooks.on("updateUser", (user, data) => {
     var controlledTokens = game.canvas.tokens.controlled;
-    saveHotbar(controlledTokens, user, data);
+    saveHotbar(controlledTokens, ui.hotbar, game.user, user, data);
 });
