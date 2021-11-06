@@ -47,3 +47,17 @@ Let's get rid of the page requirement for now.
 It's not a big requirement, but it's kind of annoying to do translations
 and limits the capabilities (max 1 page for token hotbar).
 Should ask the users later if they want this or not.
+
+Basic functionality seems to work.
+- select token, change hotbar, saves the hotbar
+- reselecting a token loads said hotbar.
+- unselecting tokens reloads the user's own hotbar
+
+Open issues:
+- selecting another token of the same actor does not load the same token hotbar
+- initial hotbar is not saved yet
+
+Nice to haves:
+- share token hotbar with other players
+  -> macro to set flags as DM?
+  -> as option, but that brings a ton of complexity
