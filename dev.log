@@ -56,6 +56,9 @@ Basic functionality seems to work.
 
 Open issues:
 - initial hotbar is not saved yet
+- bug: when going from one controlled token to another, there is a race condition
+       resulting in the wrong hotbar being loaded. Dangerous, because changes will
+       then override it.
 
 Nice to haves:
 - share token hotbar with other players
