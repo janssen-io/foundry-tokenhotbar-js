@@ -1,31 +1,21 @@
 import { TH, log } from './lib/constants.mjs';
 import { saveHotbar, loadHotbar } from './src/features.mjs';
+import { registerModuleSettings, getModuleSettings, settingKeys } from './src/settings.mjs';
 
-// class BarLoader {
-//     saveBar(page, document) { }
-
-//     loadBar(page, document) { }
-// }
-
-// class DocumentSelector {
-//     getDocument(settings) {
-//         if (isUserBar) return game.user;
-//         else if (isShared) return game.canvas.token.controlled[0];
-//     }
-// }
-
-// // updateUser
-// var loader = new BarLoader();
-// var doc = new DocumentSelector();
-// loader.saveBar(settings.page, doc.getDocument(settings));
-
-
-log("Module Loaded!");
+// Register settings when the game is properly initialized
+// This is exactly what the 'init' hook is for:
+Hooks.on('init', () => {
+    registerModuleSettings();
+    const getSetting = getModuleSettings(game.settings);
+    const isDebugging = getSetting(settingKeys.debugMode);
+    CONFIG.debug.hooks = CONFIG.debug.hooks || isDebugging;
+    TH.debug.logs = isDebugging;
+    log("Module Initialized!");
+});
 
 // Auto-enable hooks so we don't need to do so manually when reloading while developing.
 // Do NOT disable the hooks if they were already enabled outside this module
 // TODO: should probably remove this later or move it to a setting.
-CONFIG.debug.hooks = CONFIG.debug.hooks || TH.debug.hooks;
 
 // Let's save the hotbar whenever
 //  - a token is selected
