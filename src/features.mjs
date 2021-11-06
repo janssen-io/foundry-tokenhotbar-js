@@ -12,22 +12,17 @@ import { debug, TH } from '../lib/constants.mjs'
 export function saveHotbar(controlledTokens, uiHotbar, currentUser, user, data) {
     if (!data.hotbar) {
         debug("User updated, but no new hotbar data present.", data)
-        return {};
+        return undefined;
     }
 
     if (controlledTokens.length !== 1) {
         debug("Not updating any hotbar, not exactly one token selected.", controlledTokens);
-        return {};
-    }
-
-    if (uiHotbar.page !== 5) {
-        debug("Not updating any hotbar, not on the right page.", uiHotbar);
-        return {};
+        return undefined;
     }
 
     if (currentUser.id !== user.id) {
         debug("Not updating any hotbar, other user was updated", currentUser, user);
-        return {};
+        return undefined;
     }
 
     // For now, we write our logic here. Perhaps later we want to separate it for readability/maintainability.

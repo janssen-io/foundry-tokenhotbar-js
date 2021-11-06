@@ -1,7 +1,7 @@
 # Day One
 Figure out what changes there have been since I last developed modules (0.7.x).
 - Hooks still seems very much the same, perhaps their parameters have slightly changed?
-- Other things to research: 
+- Other things to research:
     - Attaching custom data to a token/actor/thing in general
     - using hooks might be dangerous when multiple users update the same bar
         -> can we use some kind of locking mechanism or optimistic locking?
@@ -9,8 +9,8 @@ Figure out what changes there have been since I last developed modules (0.7.x).
 - Why did I need such complex key logic before?
   When storing on the user, it needs to be stored under the key for the actor/token
   On the actor/token, it can be just direct or under its own ido
-  
-  
+
+
 Scenarios:
 - User updates hotbar when
 
@@ -41,3 +41,9 @@ Requirements:
     -> Features/requirements must be documented with examples
     -> All logic must be unit tested
 
+
+# Day 02
+Let's get rid of the page requirement for now.
+It's not a big requirement, but it's kind of annoying to do translations
+and limits the capabilities (max 1 page for token hotbar).
+Should ask the users later if they want this or not.
