@@ -1,5 +1,5 @@
 import { TH, log } from './lib/constants.mjs';
-import { saveHotbar } from './src/features.mjs';
+import { saveHotbar, loadHotbar } from './src/features.mjs';
 
 // class BarLoader {
 //     saveBar(page, document) { }
@@ -39,7 +39,7 @@ CONFIG.debug.hooks = CONFIG.debug.hooks || TH.debug.hooks;
 
 Hooks.on("updateUser", (user, data) => {
     var controlledTokens = game.canvas.tokens.controlled;
-    saveHotbar(controlledTokens, ui.hotbar, game.user, user, data);
+    saveHotbar(controlledTokens, game.user, user, data);
 });
 
 // Let's load the hotbar when
@@ -49,5 +49,14 @@ Hooks.on("updateUser", (user, data) => {
 //  - It's fired when a token is controlled (or let go)
 Hooks.on("controlToken", (object, isControlled) => {
     const controlledTokens = game.canvas.tokens.controlled;
-    loadHotbar(controlledTokens, ui.hotbar, game.user);
+    if(loadHotbar(game.user, controlledTokens)) {
+        ui.hotbar.render();
+    }
 });
+
+// Note: we try to stay clear from global variables (game.canvas for example)
+//       in our code. The functions in the hooks only take out the variables
+//       from the global scope that we need. All other logic is in the rest of the code.
+// This feels a bit weird, because thinking from the perspective of our feature,
+// we often don't care about having multiple tokens controlled for example.
+// But adding another layer also seems wrong. :(

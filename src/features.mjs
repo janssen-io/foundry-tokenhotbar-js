@@ -35,12 +35,25 @@ export function saveHotbar(controlledTokens, currentUser, user, data) {
     const tokenHotbar = updatedUiHotbar;
 
     documentToStoreTokenHotbar.setFlag(TH.name, `hotbar.${token.id}`, updatedUiHotbar);
-
     return tokenHotbar;
 }
 
+/**
+ *
+ * @param user
+ * @param controlledTokens
+ * @returns True, if hotbar has been loaded.
+ */
 export function loadHotbar(user, controlledTokens) {
+    if (controlledTokens.length !== 1) {
+        debug("Not loading any hotbar, not exactly one token selected.", controlledTokens);
+        return false;
+    }
+
     const token = controlledTokens[0];
     const hotbarForToken = user.getFlag(TH.name, `hotbar.${token.id}`);
-    user.data.update({ hotbar: hotbarForToken });
+    debug("Loading Hotbar", token, hotbarForToken);
+    // Use { recursive: false } to replace the hotbar, instead of merging it.
+    user.data.update({ hotbar: hotbarForToken }, { recursive: false });
+    return true;
 }
