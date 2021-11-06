@@ -1,4 +1,5 @@
 import { debug, TH } from '../lib/constants.mjs'
+import { settingKeys } from './settings.mjs'
 
 /**
  *
@@ -6,9 +7,10 @@ import { debug, TH } from '../lib/constants.mjs'
  * @param {{id: string, unsetFlag: function, setFlag: function}} currentUser
  * @param {{id: string, unsetFlag: function, setFlag: function}} user
  * @param {{hotbar: {}}} data
+ * @param {function} getSetting
  * @returns the saved Token Hotbar object
  */
-export async function saveHotbar(controlledTokens, currentUser, user, data) {
+export async function saveHotbar(controlledTokens, currentUser, user, data, getSetting) {
     if (!data.hotbar) {
         debug("User updated, but no new hotbar data present.", data)
         return;
@@ -36,16 +38,22 @@ export async function saveHotbar(controlledTokens, currentUser, user, data) {
         // Concept: ui-hotbar refers to the data from the hotbar on the bottom of the screen.
         //          updates contain the complete current page in the format { number: { slot: number, macro: Macro } }
         const updatedUiHotbar = data.hotbar;
-        const token = controlledTokens[0];
+        const token = controlledTokens[0] ;
+        // If the token is linked to an actor (e.g. PC) or we always want to link hotbars to (synthetic) actors
+        // Then use the actor to store the hotbar
+        // Otherwise use the token
+        const entityToCreateHotbarFor =
+            getSetting(settingKeys.alwaysUseActor) || token.document.isLinked
+            ? token.actor : token;
 
         // let's implement storing the hotbar on the user first. This is the simplest, as we don't need to update other clients.
         const documentToStoreTokenHotbar = user;
         const tokenHotbar = updatedUiHotbar;
 
-        debug("Storing hotbar for token", token, tokenHotbar);
+        debug("Storing hotbar for token", entityToCreateHotbarFor, tokenHotbar);
         // use the token id as we are storing the hotbar of the token
-        await documentToStoreTokenHotbar.unsetFlag(TH.name, `hotbar.${token.id}`);
-        await documentToStoreTokenHotbar.setFlag(TH.name, `hotbar.${token.id}`, updatedUiHotbar);
+        await documentToStoreTokenHotbar.unsetFlag(TH.name, `hotbar.${entityToCreateHotbarFor.id}`);
+        await documentToStoreTokenHotbar.setFlag(TH.name, `hotbar.${entityToCreateHotbarFor.id}`, updatedUiHotbar);
         return tokenHotbar;
     } else {
         debug("Not updating any hotbar, not exactly one token selected.", controlledTokens);
@@ -58,9 +66,10 @@ export async function saveHotbar(controlledTokens, currentUser, user, data) {
  *
  * @param {{ id: string}[]} controlledTokens
  * @param {{id: string, getFlag: function, data: { update: function }}} user
+ * @param {function} getSetting
  * @returns True, if hotbar has been loaded.
  */
-export function loadHotbar(user, controlledTokens) {
+export function loadHotbar(user, controlledTokens, getSetting) {
     const documentWithTokenHotbar = user;
     if (controlledTokens.length === 0) {
         const hotbarForToken = documentWithTokenHotbar.getFlag(TH.name, `hotbar.${user.id}`);
@@ -70,8 +79,11 @@ export function loadHotbar(user, controlledTokens) {
         return true;
     } else if (controlledTokens.length === 1) {
         const token = controlledTokens[0];
-        const hotbarForToken = documentWithTokenHotbar.getFlag(TH.name, `hotbar.${token.id}`);
-        debug("Loading Hotbar for token", token, hotbarForToken);
+        const entityToGetHotbarFor =
+            getSetting(settingKeys.alwaysUseActor) || token.document.isLinked
+            ? token.actor : token;
+        const hotbarForToken = documentWithTokenHotbar.getFlag(TH.name, `hotbar.${entityToGetHotbarFor.id}`);
+        debug("Loading Hotbar for token", entityToGetHotbarFor, hotbarForToken);
         // Use { recursive: false } to replace the hotbar, instead of merging it.
         user.data.update({ hotbar: hotbarForToken || {} }, { recursive: false });
         return true;

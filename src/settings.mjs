@@ -1,7 +1,7 @@
 import { TH, log, debug } from '../lib/constants.mjs';
 
 export const settingKeys = {
-    useLinkedActor: 'useLinkedActor',
+    alwaysUseActor: 'alwaysUseActor',
     debugMode: 'debugMode',
     enable: 'enable'
 };
@@ -16,9 +16,9 @@ export function registerModuleSettings(settings) {
         type: Boolean
     });
 
-    settings.register(TH.name, settingKeys.useLinkedActor, {
-        name: `${TH.name}.settings.${settingKeys.useLinkedActor}.name`,
-        hint: `${TH.name}.settings.${settingKeys.useLinkedActor}.hint`,
+    settings.register(TH.name, settingKeys.alwaysUseActor, {
+        name: `${TH.name}.settings.${settingKeys.alwaysUseActor}.name`,
+        hint: `${TH.name}.settings.${settingKeys.alwaysUseActor}.hint`,
         scope: 'world',
         config: true,
         default: true,

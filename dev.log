@@ -52,9 +52,9 @@ Basic functionality seems to work.
 - select token, change hotbar, saves the hotbar
 - reselecting a token loads said hotbar.
 - unselecting tokens reloads the user's own hotbar
+- selecting another token of the same actor does not load the same token hotbar
 
 Open issues:
-- selecting another token of the same actor does not load the same token hotbar
 - initial hotbar is not saved yet
 
 Nice to haves:

@@ -25,7 +25,8 @@ Hooks.on('init', () => {
 
 Hooks.on("updateUser", (user, data) => {
     var controlledTokens = game.canvas.tokens.controlled;
-    saveHotbar(controlledTokens, game.user, user, data);
+    const getSetting = getModuleSettings(game.settings);
+    saveHotbar(controlledTokens, game.user, user, data, getSetting);
 });
 
 // Let's load the hotbar when
@@ -35,8 +36,8 @@ Hooks.on("updateUser", (user, data) => {
 //  - It's fired when a token is controlled (or let go)
 Hooks.on("controlToken", (object, isControlled) => {
     const controlledTokens = game.canvas.tokens.controlled;
-
-    if(loadHotbar(game.user, controlledTokens)) {
+    const getSetting = getModuleSettings(game.settings);
+    if(loadHotbar(game.user, controlledTokens, getSetting)) {
         // Only re-render the hotbar, if it actually changed because of us
         ui.hotbar.render();
     }
