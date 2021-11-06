@@ -1,4 +1,4 @@
-import { TH, log } from '../lib/constants.mjs';
+import { TH, log, debug } from '../lib/constants.mjs';
 
 export const settingKeys = {
     useLinkedActor: 'useLinkedActor',
@@ -6,8 +6,8 @@ export const settingKeys = {
     enable: 'enable'
 };
 
-export function registerModuleSettings() {
-    game.settings.register(TH.name, settingKeys.enable, {
+export function registerModuleSettings(settings) {
+    settings.register(TH.name, settingKeys.enable, {
         name: `${TH.name}.settings.${settingKeys.enable}.name`,
         hint: `${TH.name}.settings.${settingKeys.enable}.hint`,
         scope: 'client',
@@ -16,7 +16,7 @@ export function registerModuleSettings() {
         type: Boolean
     });
 
-    game.settings.register(TH.name, settingKeys.useLinkedActor, {
+    settings.register(TH.name, settingKeys.useLinkedActor, {
         name: `${TH.name}.settings.${settingKeys.useLinkedActor}.name`,
         hint: `${TH.name}.settings.${settingKeys.useLinkedActor}.hint`,
         scope: 'world',
@@ -25,18 +25,27 @@ export function registerModuleSettings() {
         type: Boolean
     });
 
-    game.settings.register(TH.name, settingKeys.debugMode, {
+    settings.register(TH.name, settingKeys.debugMode, {
         name: `${TH.name}.settings.${settingKeys.debugMode}.name`,
         hint: `${TH.name}.settings.${settingKeys.debugMode}.hint`,
         scope: 'client',
         config: true,
         default: false,
-        type: Boolean
+        type: Boolean,
+        onChange: () => setDebugging(settings)
     });
+
+    setDebugging(settings);
 
     log("Module Settings registered.");
 }
 
 export function getModuleSettings(settings) {
     return (settingKey) => settings.get(TH.name, settingKey);
+}
+
+function setDebugging(settings) {
+    const isDebugging = settings.get(TH.name, settingKeys.debugMode);
+    log("Debugging enabled?", isDebugging);
+    TH.debug.logs = isDebugging;
 }

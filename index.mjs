@@ -1,15 +1,11 @@
 import { TH, log } from './lib/constants.mjs';
 import { saveHotbar, loadHotbar } from './src/features.mjs';
-import { registerModuleSettings, getModuleSettings, settingKeys } from './src/settings.mjs';
+import { registerModuleSettings, getModuleSettings } from './src/settings.mjs';
 
 // Register settings when the game is properly initialized
 // This is exactly what the 'init' hook is for:
 Hooks.on('init', () => {
-    registerModuleSettings();
-    const getSetting = getModuleSettings(game.settings);
-    const isDebugging = getSetting(settingKeys.debugMode);
-    CONFIG.debug.hooks = CONFIG.debug.hooks || isDebugging;
-    TH.debug.logs = isDebugging;
+    registerModuleSettings(game.settings);
     log("Module Initialized!");
 });
 
