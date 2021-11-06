@@ -35,7 +35,9 @@ Hooks.on("updateUser", (user, data) => {
 //  - It's fired when a token is controlled (or let go)
 Hooks.on("controlToken", (object, isControlled) => {
     const controlledTokens = game.canvas.tokens.controlled;
+
     if(loadHotbar(game.user, controlledTokens)) {
+        // Only re-render the hotbar, if it actually changed because of us
         ui.hotbar.render();
     }
 });

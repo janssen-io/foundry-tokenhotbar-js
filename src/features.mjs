@@ -11,12 +11,12 @@ import { debug, TH } from '../lib/constants.mjs'
 export async function saveHotbar(controlledTokens, currentUser, user, data) {
     if (!data.hotbar) {
         debug("User updated, but no new hotbar data present.", data)
-        return undefined;
+        return;
     }
 
     if (currentUser.id !== user.id) {
         debug("Not updating any hotbar, other user was updated", currentUser, user);
-        return undefined;
+        return;
     }
 
     if (controlledTokens.length === 0) {
