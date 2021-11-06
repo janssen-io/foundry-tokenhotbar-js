@@ -44,9 +44,7 @@ describe("The Token Hotbar saves when...", () => {
 describe("Loading the Token Hotbar...", () => {
     it("updates the ui hotbar", () => {
         let updatedData;
-        const updateUser = data => {
-            updatedData = data;
-        };
+        const updateUser = data => { updatedData = data; };
         const tokenHotbar = {
             "7": "PGOQX6B0kW7niMum",
             "42": "pQAy1QCUuNHYMFx8"
