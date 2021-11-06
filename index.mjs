@@ -41,3 +41,13 @@ Hooks.on("updateUser", (user, data) => {
     var controlledTokens = game.canvas.tokens.controlled;
     saveHotbar(controlledTokens, ui.hotbar, game.user, user, data);
 });
+
+// Let's load the hotbar when
+//  - a single token is selected
+
+// We use the controlToken [controlPlaceableObject] hook
+//  - It's fired when a token is controlled (or let go)
+Hooks.on("controlToken", (object, isControlled) => {
+    const controlledTokens = game.canvas.tokens.controlled;
+    loadHotbar(controlledTokens, ui.hotbar, game.user);
+});

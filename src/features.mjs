@@ -3,13 +3,12 @@ import { debug, TH } from '../lib/constants.mjs'
 /**
  *
  * @param {{ id: string}[]} controlledTokens
- * @param {page: number} uiHotbar
  * @param {{id: string, setFlag: function}} currentUser
  * @param {{id: string, setFlag: function}} user
  * @param {{hotbar: {}}} data
  * @returns the saved Token Hotbar object
  */
-export function saveHotbar(controlledTokens, uiHotbar, currentUser, user, data) {
+export function saveHotbar(controlledTokens, currentUser, user, data) {
     if (!data.hotbar) {
         debug("User updated, but no new hotbar data present.", data)
         return undefined;
@@ -38,4 +37,10 @@ export function saveHotbar(controlledTokens, uiHotbar, currentUser, user, data) 
     documentToStoreTokenHotbar.setFlag(TH.name, `hotbar.${token.id}`, updatedUiHotbar);
 
     return tokenHotbar;
+}
+
+export function loadHotbar(user, controlledTokens) {
+    const token = controlledTokens[0];
+    const hotbarForToken = user.getFlag(TH.name, `hotbar.${token.id}`);
+    user.data.update({ hotbar: hotbarForToken });
 }
