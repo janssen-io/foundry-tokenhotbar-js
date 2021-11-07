@@ -1,0 +1,14 @@
+{
+    "token-hotbar": {
+        "settings": {
+            "alwaysUseActor": {
+                "name": "Conectați la actorul întotdeauna",
+                "hint": "Conectați Token Hotbar-ul la actor chiar dacă jetonul nu este conectat la actorul lui."
+            },
+            "debugMode": {
+                "name": "Mod Debug",
+                "hint": "Token Hotbar va scrie mesaje detaliate în consolă."
+            }
+        }
+    }
+}

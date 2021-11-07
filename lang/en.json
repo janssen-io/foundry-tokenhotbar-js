@@ -1,0 +1,14 @@
+{
+    "token-hotbar": {
+        "settings": {
+            "alwaysUseActor": {
+                "name": "Always link to actor",
+                "hint": "Link the token hotbar to the actor even if the token is unlinked."
+            },
+            "debugMode": {
+                "name": "Debug Mode",
+                "hint": "Log verbosely to the console."
+            }
+        }
+    }
+}

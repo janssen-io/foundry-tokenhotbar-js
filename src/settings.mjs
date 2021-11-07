@@ -2,20 +2,10 @@ import { TH, log, debug } from '../lib/constants.mjs';
 
 export const settingKeys = {
     alwaysUseActor: 'alwaysUseActor',
-    debugMode: 'debugMode',
-    enable: 'enable'
+    debugMode: 'debugMode'
 };
 
 export function registerModuleSettings(settings) {
-    settings.register(TH.name, settingKeys.enable, {
-        name: `${TH.name}.settings.${settingKeys.enable}.name`,
-        hint: `${TH.name}.settings.${settingKeys.enable}.hint`,
-        scope: 'client',
-        config: true,
-        default: true,
-        type: Boolean
-    });
-
     settings.register(TH.name, settingKeys.alwaysUseActor, {
         name: `${TH.name}.settings.${settingKeys.alwaysUseActor}.name`,
         hint: `${TH.name}.settings.${settingKeys.alwaysUseActor}.hint`,

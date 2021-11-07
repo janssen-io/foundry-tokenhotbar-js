@@ -1,0 +1,14 @@
+{
+    "token-hotbar": {
+        "settings": {
+            "alwaysUseActor": {
+                "name": "Sempre vincular à um Ator",
+                "hint": "Vincule a barra de atalho à um token mesmo desvinculádo a um Ator."
+            },
+            "debugMode": {
+                "name": "Modo Debug",
+                "hint": "envia mensagens para o console de Debug."
+            }
+        }
+    }
+}

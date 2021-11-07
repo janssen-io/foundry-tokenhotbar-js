@@ -1,0 +1,15 @@
+{
+  "token-hotbar": {
+    "settings": {
+      "alwaysUseActor": {
+        "name": "Zawsze łącz z aktorem",
+        "hint": "Połącz pasek tokenu z aktorem zawsze, nawet jeśli token i aktor nie są połączeni."
+      },
+      "debugMode": {
+        "name": "Tryb debugowania",
+        "hint": "Wysyłaj więcej zapisów do konsoli."
+      }
+    }
+  }
+}
+

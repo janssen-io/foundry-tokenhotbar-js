@@ -1,0 +1,14 @@
+{
+    "token-hotbar": {
+        "settings": {
+            "alwaysUseActor": {
+                "name": "Siempre enlazar al actor",
+                "hint": "Enlazar la Barra de Tokens al actor incluso si el token no esta asociado."
+            },
+            "debugMode": {
+                "name": "Modo depuración",
+                "hint": "Registro detallado en consola."
+            }
+        }
+    }
+}

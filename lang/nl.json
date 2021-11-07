@@ -1,0 +1,14 @@
+{
+    "token-hotbar": {
+        "settings": {
+            "alwaysUseActor": {
+                "name": "Altijd aan personage koppelen",
+                "hint": "Koppel de Token Hotbar aan de acteur ook wanneer de token niet gekoppeld is."
+            },
+            "debugMode": {
+                "name": "Debug Modus",
+                "hint": "Schrijf gedetailleerde berichten naar de ontwikkelaarsconsole."
+            }
+        }
+    }
+}
