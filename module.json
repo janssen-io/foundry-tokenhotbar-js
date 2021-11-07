@@ -15,11 +15,10 @@
     ],
     "packs": [
         {
-            "label": "Token Hotbar",
-            "type": "Macro",
             "name": "token-hotbar",
-            "path": "./packs/token-hotbar.db",
-            "package": "world"
+            "label": "Token Hotbar",
+            "entity": "Macro",
+            "path": "./packs/token-hotbar.db"
         }
     ],
     "languages": [
