@@ -1,5 +1,5 @@
 import { TH, log } from './src/constants.mjs';
-import { saveHotbar, loadHotbar, saveUserHotbarOnFirstUse } from './src/features.mjs';
+import { saveHotbar, updateHotbar, loadHotbar, saveUserHotbarOnFirstUse } from './src/features.mjs';
 import { registerModuleSettings, getModuleSettings } from './src/settings.mjs';
 
 // Register settings when the game is properly initialized
@@ -7,13 +7,12 @@ import { registerModuleSettings, getModuleSettings } from './src/settings.mjs';
 Hooks.on('init', () => {
     registerModuleSettings(game.settings);
     log("Module Initialized!");
+});
+
+Hooks.on('ready', () => {
     saveUserHotbarOnFirstUse(game.user, game.user.data.hotbar);
 });
 
-
-// Auto-enable hooks so we don't need to do so manually when reloading while developing.
-// Do NOT disable the hooks if they were already enabled outside this module
-// TODO: should probably remove this later or move it to a setting.
 
 // Let's save the hotbar whenever
 //  - a token is selected
@@ -24,11 +23,10 @@ Hooks.on('init', () => {
 //  - It's not updated whenever the user views another page of their hotbar (unlike renderHotbar)
 //  - It's sent to other clients
 //  - There's no other hooks that contain the hotbar data that we need
-
 Hooks.on("updateUser", (user, data) => {
     var controlledTokens = game.canvas.tokens.controlled;
     const getSetting = getModuleSettings(game.settings);
-    saveHotbar(controlledTokens, game.user, user, data, getSetting);
+    updateHotbar(controlledTokens, game.user, user, data, getSetting);
 });
 
 // Let's load the hotbar when
@@ -62,3 +60,7 @@ Hooks.on("controlToken", (object, isControlled) => {
 // This feels a bit weird, because thinking from the perspective of our feature,
 // we often don't care about having multiple tokens controlled for example.
 // But adding another layer also seems wrong. :(
+
+// Finally, we would like to save from macro's, so sharing becomes easier.
+// Easiest way to do that is to add a TokenHotbar object to the global scope
+window[TH.name] = { saveHotbar }

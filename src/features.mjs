@@ -11,7 +11,7 @@ export async function saveUserHotbarOnFirstUse(user, hotbar) {
     const entity = user;
     const tokenHotbar = documentWithHotbar.getFlag(TH.name, `hotbar.${entity.id}`);
     if (!tokenHotbar) {
-        await storeHotbar(hotbar, user, user);
+        await saveHotbar(hotbar, user, user);
         return true;
     }
 
@@ -27,7 +27,7 @@ export async function saveUserHotbarOnFirstUse(user, hotbar) {
  * @param {function} getSetting
  * @returns the saved Token Hotbar object
  */
-export async function saveHotbar(controlledTokens, currentUser, user, data, getSetting) {
+export async function updateHotbar(controlledTokens, currentUser, user, data, getSetting) {
     if (!data.hotbar) {
         debug("User updated, but no new hotbar data present.", data)
         return;
@@ -45,8 +45,22 @@ export async function saveHotbar(controlledTokens, currentUser, user, data, getS
 
     const entity = determineEntityForHotbar(controlledTokens, user, getSetting);
     const documentWithHotbar = user;
-    await storeHotbar(data.hotbar, documentWithHotbar, entity);
+    await saveHotbar(data.hotbar, documentWithHotbar, entity);
     return data.hotbar;
+}
+
+/**
+ * Store the entity's hotbar onto some document.
+ * The entity's ID will be used to store different hotbars on the same document.
+ * @param hotbarToStore The hotbar to store
+ * @param documentWithHotbar The document to store the hotbar onto (in their flags)
+ * @param entity The entity to store the hotbar for. Usually the user itself, the token or its actor.
+ */
+export async function saveHotbar(hotbarToStore, documentWithHotbar, entity) {
+    debug(`Storing hotbar for ${entity.constructor.name} on document`, { documentWithHotbar, entity, hotbarToStore });
+    // use the token id as we are storing the hotbar of the token
+    await documentWithHotbar.unsetFlag(TH.name, `hotbar.${entity.id}`);
+    await documentWithHotbar.setFlag(TH.name, `hotbar.${entity.id}`, hotbarToStore);
 }
 
 /**
@@ -87,18 +101,4 @@ function determineEntityForHotbar(controlledTokens, user, getSetting) {
             ? token.actor
             : token;
     }
-}
-
-/**
- * Store the entity's hotbar onto some document.
- * The entity's ID will be used to store different hotbars on the same document.
- * @param hotbarToStore The hotbar to store
- * @param documentWithHotbar The document to store the hotbar onto (in their flags)
- * @param entity The entity to store the hotbar for. Usually the user itself, the token or its actor.
- */
-async function storeHotbar(hotbarToStore, documentWithHotbar, entity) {
-    debug(`Storing hotbar for ${entity.constructor.name} on document`, { documentWithHotbar, entity, hotbarToStore });
-    // use the token id as we are storing the hotbar of the token
-    await documentWithHotbar.unsetFlag(TH.name, `hotbar.${entity.id}`);
-    await documentWithHotbar.setFlag(TH.name, `hotbar.${entity.id}`, hotbarToStore);
 }

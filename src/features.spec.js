@@ -1,24 +1,24 @@
 import { assert, it, describe } from "../lib/test.mjs";
 import { TH } from './constants.mjs';
 import { saveUserHotbarOnFirstUse } from "./features.mjs";
-import { saveHotbar, loadHotbar } from "./features.mjs";
+import { updateHotbar, loadHotbar } from "./features.mjs";
 import { settingKeys } from "./settings.mjs";
 
 TH.debug.logs = false;
 
 await describe("The Token Hotbar does not save when...", async () => {
     await it("multiple tokens are selected", async () => {
-        var savedHotbar = await saveHotbar([1, 2], { id: 1 }, { id: 1 }, {hotbar: {}});
+        var savedHotbar = await updateHotbar([1, 2], { id: 1 }, { id: 1 }, {hotbar: {}});
         assert(savedHotbar).equals(undefined);
     });
 
     await it("the data contains no hotbar data", async () => {
-        var savedHotbar = await saveHotbar([1], { id: 1 }, { id: 1 }, {someOtherData: {}});
+        var savedHotbar = await updateHotbar([1], { id: 1 }, { id: 1 }, {someOtherData: {}});
         assert(savedHotbar).equals(undefined);
     });
 
     await it("it's not the current user that was updated", async () => {
-        var savedHotbar = await saveHotbar([1], { id: 1 }, { id: 2 }, {hotbar: {}});
+        var savedHotbar = await updateHotbar([1], { id: 1 }, { id: 2 }, {hotbar: {}});
         assert(savedHotbar).equals(undefined);
     });
 });
@@ -39,7 +39,7 @@ await describe("The Token Hotbar saves when...", async () => {
                 [settingKeys.alwaysUseActor]: false
             }[k];
         };
-        var savedHotbar = await saveHotbar([ token ], currentUser, user, data, getSetting);
+        var savedHotbar = await updateHotbar([ token ], currentUser, user, data, getSetting);
         assert(savedHotbar).equals(setHotbar);
         assert(setHotbar).equals(data.hotbar);
         assert(hotbarKey).equals('hotbar.' + token.id);
@@ -61,7 +61,7 @@ await describe("The Token Hotbar saves when...", async () => {
                 [settingKeys.alwaysUseActor]: false
             }[k];
         };
-        var savedHotbar = await saveHotbar([ token ], currentUser, user, data, getSetting);
+        var savedHotbar = await updateHotbar([ token ], currentUser, user, data, getSetting);
         assert(savedHotbar).equals(setHotbar);
         assert(setHotbar).equals(data.hotbar);
         assert(hotbarKey).equals('hotbar.' + actor.id);
@@ -83,7 +83,7 @@ await describe("The Token Hotbar saves when...", async () => {
                 [settingKeys.alwaysUseActor]: true // Vital for this test
             }[k];
         };
-        var savedHotbar = await saveHotbar([ token ], currentUser, user, data, getSetting);
+        var savedHotbar = await updateHotbar([ token ], currentUser, user, data, getSetting);
         assert(savedHotbar).equals(setHotbar);
         assert(setHotbar).equals(data.hotbar);
         assert(hotbarKey).equals('hotbar.' + actor.id);
