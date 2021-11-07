@@ -7,8 +7,9 @@
     "url": "https://github.com/janssen-io/foundry-tokenhotbar-js",
     "bugs": "https://github.com/janssen-io/foundry-tokenhotbar-js/issues",
     "author": "Stan",
-    "version": "1.0.0",
-    "minimumCoreVersion": "0.9.0",
+    "version": "1.0.2",
+    "minimumCoreVersion": "9.266",
+    "compatibleCoreVersion": "9.266",
     "esmodules": [
         "./index.mjs"
     ],

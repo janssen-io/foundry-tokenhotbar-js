@@ -1,4 +1,4 @@
-import { TH, log } from './lib/constants.mjs';
+import { TH, log } from './src/constants.mjs';
 import { saveHotbar, loadHotbar } from './src/features.mjs';
 import { registerModuleSettings, getModuleSettings } from './src/settings.mjs';
 
