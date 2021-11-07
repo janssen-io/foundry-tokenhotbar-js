@@ -15,9 +15,7 @@ git add .
 git commit -m "Prepared for release v$1"
 git tag "v$1"
 
-zip -r token-hotbar.zip lang/ index.mjs module.json src/
+zip -r token-hotbar.zip lang/ index.mjs module.json src/ packs/
 
 echo "Updated $OLDVER to $1, ready to push: git push --tags"
-
-
 

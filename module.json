@@ -13,6 +13,15 @@
     "esmodules": [
         "./index.mjs"
     ],
+    "packs": [
+        {
+            "label": "Token Hotbar",
+            "type": "Macro",
+            "name": "token-hotbar",
+            "path": "./packs/token-hotbar.db",
+            "package": "world"
+        }
+    ],
     "languages": [
         { "lang": "de", "name": "Deutsch (German)", "path": "lang/de.json" },
         { "lang": "en", "name": "English", "path": "lang/en.json" },

@@ -20,7 +20,7 @@ All pages of the hotbar will change depending on the token you have selected.
 Unfortunately, this version of Token Hotbar does not work with Norc's Custom Hotbar.
 
 ### Shared Token Hotbar
-Hotbar's can be shared manually via the provided macro. A GM can run this macro and select for which tokens and with which player they want to share the hotbar.
+Hotbar's can be shared manually via the provided macro. A GM can run this macro and select for which tokens and with which player they want to share the hotbar. You can find this macro in the compendium 'Token Hotbar'.
 
 ### Settings
 * **Always link to actor:** link the hotbar to the actor, even if the token itself is not linked.
