@@ -1,5 +1,5 @@
 import { TH, log } from './src/constants.mjs';
-import { saveHotbar, loadHotbar } from './src/features.mjs';
+import { saveHotbar, loadHotbar, saveUserHotbarOnFirstUse } from './src/features.mjs';
 import { registerModuleSettings, getModuleSettings } from './src/settings.mjs';
 
 // Register settings when the game is properly initialized
@@ -7,7 +7,9 @@ import { registerModuleSettings, getModuleSettings } from './src/settings.mjs';
 Hooks.on('init', () => {
     registerModuleSettings(game.settings);
     log("Module Initialized!");
+    saveUserHotbarOnFirstUse(game.user, game.user.data.hotbar);
 });
+
 
 // Auto-enable hooks so we don't need to do so manually when reloading while developing.
 // Do NOT disable the hooks if they were already enabled outside this module

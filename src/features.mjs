@@ -2,6 +2,23 @@ import { debug, TH } from './constants.mjs'
 import { settingKeys } from './settings.mjs'
 
 /**
+ * Store the user's hotbar if it hasn't been stored yet.
+ * @param {{id: string, unsetFlag: function, setFlag: function, getFlag: function}} user
+ * @param {{ [number]: string }} hotbar
+ */
+export async function saveUserHotbarOnFirstUse(user, hotbar) {
+    const documentWithHotbar = user;
+    const entity = user;
+    const tokenHotbar = documentWithHotbar.getFlag(TH.name, `hotbar.${entity.id}`);
+    if (!tokenHotbar) {
+        await storeHotbar(hotbar, user, user);
+        return true;
+    }
+
+    return false;
+}
+
+/**
  *
  * @param {{ id: string, actor: { id: string }, document: object }[]} controlledTokens
  * @param {{id: string, unsetFlag: function, setFlag: function}} currentUser

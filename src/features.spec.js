@@ -1,5 +1,6 @@
 import { assert, it, describe } from "../lib/test.mjs";
 import { TH } from './constants.mjs';
+import { saveUserHotbarOnFirstUse } from "./features.mjs";
 import { saveHotbar, loadHotbar } from "./features.mjs";
 import { settingKeys } from "./settings.mjs";
 
@@ -176,7 +177,7 @@ await describe("Loading the Token Hotbar...", async () => {
 });
 
 await describe("The Token Hotbar is not loaded when...", async () => {
-    await it("More than one token is controlled", async () => {
+    await it("more than one token is controlled", async () => {
         let updatedData;
         const updateUser = data => { updatedData = data; };
         const tokenHotbar = {
@@ -211,5 +212,69 @@ await describe("The Token Hotbar is not loaded when...", async () => {
         const hasLoaded = await loadHotbar(user, controlledTokens);
         assert(hasLoaded).equals(false);
         assert(updatedData).equals(undefined);
+    });
+});
+
+await describe("On initialization the user's hotbar is...", async () => {
+    await it("not saved if it already was saved before", async () => {
+        let setHotbar, hotbarKey;
+        const tokenHotbar = {
+            "7": "PGOQX6B0kW7niMum",
+            "42": "pQAy1QCUuNHYMFx8"
+        };
+        const getUserFlag = (scope, key) => {
+            // using dots in flags allows to go into nested structures.
+            // however, this does not work in plain js :(
+            var keys = key.split('.');
+            var flags = {
+                [TH.name]: {
+                    hotbar: {
+                        'user-1': tokenHotbar,
+                    }
+                }
+            }[scope];
+            return keys.reduce((prev, curr) => { return prev[curr] }, flags);
+        };
+        const user = {
+            getFlag: getUserFlag,
+            unsetFlag: () => {},
+            setFlag: (scope, key, value) => { setHotbar = value; hotbarKey = key; },
+            id: 'user-1'
+        };
+
+        const hasSaved = await saveUserHotbarOnFirstUse(user, tokenHotbar);
+        assert(hasSaved).equals(false);
+        assert(setHotbar).equals(undefined);
+    });
+
+    await it("saved if it was not saved before", async () => {
+        let setHotbar, hotbarKey;
+        const tokenHotbar = {
+            "7": "PGOQX6B0kW7niMum",
+            "42": "pQAy1QCUuNHYMFx8"
+        };
+        const getUserFlag = (scope, key) => {
+            // using dots in flags allows to go into nested structures.
+            // however, this does not work in plain js :(
+            var keys = key.split('.');
+            var flags = {
+                [TH.name]: {
+                    hotbar: {
+                        'user-1': setHotbar,
+                    }
+                }
+            }[scope];
+            return keys.reduce((prev, curr) => { return prev[curr] }, flags);
+        };
+        const user = {
+            getFlag: getUserFlag,
+            unsetFlag: () => {},
+            setFlag: (scope, key, value) => { setHotbar = value; hotbarKey = key; },
+            id: 'user-1'
+        };
+
+        const hasSaved = await saveUserHotbarOnFirstUse(user, tokenHotbar);
+        assert(hasSaved).equals(true);
+        assert(setHotbar).equals(tokenHotbar);
     });
 });
