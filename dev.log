@@ -1,14 +1,16 @@
-# Day One
-Figure out what changes there have been since I last developed modules (0.7.x).
-- Hooks still seems very much the same, perhaps their parameters have slightly changed?
+# Day 01
+Figure out what changes there have been since I last developed modules (0.7.x)
+- Hooks still seems very much the same, perhaps their parameters have slightly
+  changed?
 - Other things to research:
     - Attaching custom data to a token/actor/thing in general
     - using hooks might be dangerous when multiple users update the same bar
         -> can we use some kind of locking mechanism or optimistic locking?
 
 - Why did I need such complex key logic before?
-  When storing on the user, it needs to be stored under the key for the actor/token
-  On the actor/token, it can be just direct or under its own ido
+  When storing on the user, it needs to be stored under the key for the
+  actor/token.
+  On the actor/token, it can be just direct or under its own id.
 
 
 Scenarios:
@@ -21,14 +23,16 @@ Scenarios:
   Token is selected by them and other players
     -> update token hotbar
     -> update ui hotbar (done by Foundry, we do nothing)
-    -> update ui hotbar other players (correct page, no need to switch pages if not active)
+    -> update ui hotbar other players (correct page, no need to switch pages if
+       not active)
 
   No token is selected
     -> Player's 'no controlled token hotbar' is updated
 
   No token is selected, but hotbar is shared
     -> Player's 'no controlled token hotbar' is updated
-    -> Other player's hotbar is updated, if they do not have a token selected.
+    -> Other player's hotbar is updated, if they do not have a token
+       selected.
 
   Nice to have:
     - Page can be set by players individually
@@ -36,7 +40,8 @@ Scenarios:
 Requirements:
 - Code must be readable for the average foundry developer
     -> Everything must be in plain javascript
-    -> Decisions must be documented (why do we store flags in specific documents, why do we use specific hooks, etc.)
+    -> Decisions must be documented (why do we store flags in specific
+       documents, why do we use specific hooks, etc.)
     -> Concepts must be documented
     -> Features/requirements must be documented with examples
     -> All logic must be unit tested
@@ -52,15 +57,23 @@ Basic functionality seems to work.
 - select token, change hotbar, saves the hotbar
 - reselecting a token loads said hotbar.
 - unselecting tokens reloads the user's own hotbar
-- selecting another token of the same actor does not load the same token hotbar
+- selecting another token of the same actor does not load the same token
+  hotbar
 
 Open issues:
 - initial hotbar is not saved yet
-- bug: when going from one controlled token to another, there is a race condition
-       resulting in the wrong hotbar being loaded. Dangerous, because changes will
-       then override it.
+- bug: when going from one controlled token to another, there is a race
+       condition resulting in the wrong hotbar being loaded. Dangerous,
+       because changes will then override it.
 
 Nice to haves:
 - share token hotbar with other players
   -> macro to set flags as DM?
   -> as option, but that brings a ton of complexity
+
+# Day 03
+Using a timeout to prevent the race condition described yesterday.
+Basic functionality now seems to work. Let's see if the players experience any
+issues or if they are missing any features.
+Meanwhile, I want to check if we can manually share hotbars by creating a macro
+for the GM.
