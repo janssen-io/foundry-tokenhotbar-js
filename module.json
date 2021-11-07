@@ -18,7 +18,8 @@
             "name": "token-hotbar",
             "label": "Token Hotbar",
             "entity": "Macro",
-            "path": "./packs/token-hotbar.db"
+            "path": "./packs/token-hotbar.db",
+            "module": "token-hotbar"
         }
     ],
     "languages": [
