@@ -1,5 +1,5 @@
 import { assert, it, describe } from "../lib/test.mjs";
-import { TH } from '../lib/constants.mjs';
+import { TH } from './constants.mjs';
 import { saveHotbar, loadHotbar } from "./features.mjs";
 import { settingKeys } from "./settings.mjs";
 

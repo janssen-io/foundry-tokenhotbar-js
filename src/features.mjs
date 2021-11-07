@@ -1,4 +1,4 @@
-import { debug, TH } from '../lib/constants.mjs'
+import { debug, TH } from './constants.mjs'
 import { settingKeys } from './settings.mjs'
 
 /**

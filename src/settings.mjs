@@ -1,4 +1,4 @@
-import { TH, log, debug } from '../lib/constants.mjs';
+import { TH, log, debug } from './constants.mjs';
 
 export const settingKeys = {
     alwaysUseActor: 'alwaysUseActor',

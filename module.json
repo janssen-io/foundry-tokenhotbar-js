@@ -1,9 +1,9 @@
 {
     "name": "token-hotbar",
-    "title": "Token Hotbar 2.0",
+    "title": "Token Hotbar",
     "description": "...",
     "author": "Stan",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "minimumCoreVersion": "0.9.0",
     "esmodules": [
         "./index.mjs"
