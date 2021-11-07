@@ -1,7 +1,7 @@
 <h1 align="center">Token Hotbar</h1>
 <p align="center">
-<img src="https://img.shields.io/github/downloads-pre/janssen-io/foundry-tokenhotbar-js/v1.0.5/token-hotbar.zip?label=v1.0.5" alt="v1.0.5 downloads" />
-<img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/janssen-io/foundry-tokenhotbar-js/releases/download/v1.0.5/module.json" alt="Supported Foundry VTT version"/>
+<img src="https://img.shields.io/github/downloads-pre/janssen-io/foundry-tokenhotbar-js/v1.0.6/token-hotbar.zip?label=v1.0.6" alt="v1.0.6 downloads" />
+<img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/janssen-io/foundry-tokenhotbar-js/releases/download/v1.0.6/module.json" alt="Supported Foundry VTT version"/>
 </p>
 
 Using this Foundry VTT module, you can assign one of the hotbar pages to remember macros per token.
