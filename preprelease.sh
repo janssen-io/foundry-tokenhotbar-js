@@ -11,5 +11,8 @@ fi
 OLDVER=`cat module.json | jq -r '.version'`
 sed -i "s/$OLDVER/$1/g" module.json README.md
 
-echo "Updated $OLDVER to $1, please commit and tag."
+git add .
+git commit -m "Prepared for release v$1"
+git tag "v$1"
+echo "Updated $OLDVER to $1, ready to push: git push --tags"
 
