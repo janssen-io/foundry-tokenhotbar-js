@@ -8,8 +8,8 @@
     "bugs": "https://github.com/janssen-io/foundry-tokenhotbar-js/issues",
     "author": "Stan",
     "version": "1.1.1",
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
+    "minimumCoreVersion": "0.8.9",
+    "compatibleCoreVersion": "9.226",
     "esmodules": [
         "./index.mjs"
     ],
