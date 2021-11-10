@@ -4,10 +4,9 @@
 <img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/janssen-io/foundry-tokenhotbar-js/releases/download/v1.1.2/module.json" alt="Supported Foundry VTT version"/>
 </p>
 
-Using this Foundry VTT module, you can assign one of the hotbar pages to remember macros per token.
-If the token is linked to an actor, the hotbar will be associated with the actor.
+This module provides a unique hotbar for every token. If the token is linked to an actor (for player characters), then all tokens of that actor will have the same hotbar.
 
-It's slimmed down to make maintenance easier and hopefully the code is easier to understand for 
+It's slimmed down to make maintenance easier and hopefully the code is easier to understand for
 anyone who has ever written a macro in Foundry.
 
 ## Features
