@@ -43,3 +43,9 @@ tokens and with which player they want to share the hotbar. You can find this ma
 * 🇧🇷 Português (Brazil)
 * 🇷🇴 Română
 
+## FAQ
+
+#### Why did you create a new package?
+The original Token Hotbar had some issues which were hard to resolve ([#38](https://github.com/League-of-Foundry-Developers/foundry-token-hotbar/issues/46), [#46](https://github.com/League-of-Foundry-Developers/foundry-token-hotbar/issues/46) and [#50](https://github.com/League-of-Foundry-Developers/foundry-token-hotbar/issues/50)). So I created this new version that has a more stable, but unfortunately also more limited functionality.
+
+On top of that, the code is kept more straight forward so it's easier for other developers to see what's going on (and perhaps help with maintenance later on).
