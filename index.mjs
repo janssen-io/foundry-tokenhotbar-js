@@ -1,11 +1,19 @@
 import { TH, log } from './src/constants.mjs';
-import { saveHotbar, updateHotbar, loadHotbar, saveUserHotbarOnFirstUse } from './src/features.mjs';
-import { registerModuleSettings, getModuleSettings } from './src/settings.mjs';
+import {
+    saveHotbar,
+    updateHotbar,
+    loadHotbar,
+    updateCustomHotbar,
+    loadCustomHotbar,
+    saveUserHotbarOnFirstUse
+} from './src/features.mjs';
+import { registerModuleSettings, getModuleSettings, settingKeys } from './src/settings.mjs';
 
 // Register settings when the game is properly initialized
 // This is exactly what the 'init' hook is for:
 Hooks.on('init', () => {
-    registerModuleSettings(game.settings);
+    const hasCustomHotbar = !!game.modules.get('custom-hotbar');
+    registerModuleSettings(game.settings, hasCustomHotbar);
     log("Module Initialized!");
 });
 
@@ -26,7 +34,12 @@ Hooks.on('ready', () => {
 Hooks.on("updateUser", (user, data) => {
     var controlledTokens = game.canvas.tokens.controlled;
     const getSetting = getModuleSettings(game.settings);
-    updateHotbar(controlledTokens, game.user, user, data, getSetting);
+
+    if (getSetting(settingKeys.useCustomHotbar)) {
+        updateCustomHotbar(controlledTokens, game.user, user, data, getSetting, ui.customHotbar);
+    } else {
+        updateHotbar(controlledTokens, game.user, user, data, getSetting);
+    }
 });
 
 // Let's load the hotbar when
@@ -47,9 +60,17 @@ Hooks.on("controlToken", (object, isControlled) => {
     controlTokenTimeout = window.setTimeout(() => {
         const controlledTokens = game.canvas.tokens.controlled;
         const getSetting = getModuleSettings(game.settings);
-        if(loadHotbar(game.user, controlledTokens, getSetting)) {
-            // Only re-render the hotbar, if it actually changed because of us
-            ui.hotbar.render();
+
+        if (getSetting(settingKeys.useCustomHotbar)) {
+            if (!ui.customHotbar) {
+                throw new Error('Custom Hotbar is not enabled or is no longer located in `ui.customHotbar`');
+            }
+            loadCustomHotbar(game.user, controlledTokens, getSetting, ui.customHotbar);
+        } else {
+            if(loadHotbar(game.user, controlledTokens, getSetting)) {
+                // Only re-render the hotbar, if it actually changed because of us
+                ui.hotbar.render();
+            }
         }
     }, 100);
 });

@@ -102,3 +102,93 @@ function determineEntityForHotbar(controlledTokens, user, getSetting) {
             : token;
     }
 }
+
+let isUpdatingCustomHotbar = false;
+/**
+ *
+ * @param {{ id: string, actor: { id: string }, document: object }[]} controlledTokens
+ * @param {{id: string, unsetFlag: function, setFlag: function}} currentUser
+ * @param {{id: string, unsetFlag: function, setFlag: function}} user
+ * @param {{flags: { customHotbar: {}}}} data
+ * @param {function} getSetting
+ * @param {{getCustomHotbarMacros: function}} customHotbar
+ * @returns the saved Token Hotbar object
+ */
+export async function updateCustomHotbar(controlledTokens, currentUser, user, data, getSetting, customHotbar) {
+    if (!data.flags['custom-hotbar']) {
+        debug("User updated, but no new custom hotbar data present.", data)
+        return;
+    }
+
+    if (currentUser.id !== user.id) {
+        debug("Not updating any hotbar, other user was updated", currentUser, user);
+        return;
+    }
+
+    if (controlledTokens.length > 1) {
+        debug("Not updating any hotbar, more than one token selected.", controlledTokens);
+        return;
+    }
+    if (isUpdatingCustomHotbar) {
+        debug("Already loading the Token Hotbar onto the Custom Hotbar");
+        return false;
+    }
+
+    // Unlike the hotbar update, the custom hotbar data does not contain the entire new
+    // hotbar. Only the data that needs to be updated.
+    // I think it's safer to just get the current hotbar and store that,
+    // rather than trying to apply the update to our own data.
+    // Then no matter if the event data changes, this will still work.
+    // Assuming that `getCustomHotbarMacros` is more stable than the event data (past experience)
+    function getCustomHotbar() {
+        const pages = [1]; // Add [2, 3, 4, 5] if all 5 pages would be supported.
+        const macrosPerPage = pages.map(page => customHotbar.getCustomHotbarMacros(page));
+
+        // macrosPerPage => [ [ { slot: number, macro: Macro } ] ]
+        const hotbarData = macrosPerPage
+            // => [ { slot: number, macro: Macro } ]
+            .flat()
+            // => { [number]: string }
+            .reduce((prev, curr) => { prev[curr.slot] = curr.macro?.id; return prev; }, {});
+
+        return hotbarData;
+    }
+
+    const entity = determineEntityForHotbar(controlledTokens, user, getSetting);
+    const documentWithHotbar = user;
+    const newHotbar = getCustomHotbar();
+    debug("Saving Custom Hotbar");
+    await saveHotbar(newHotbar, documentWithHotbar, entity);
+    return newHotbar;
+}
+
+/**
+ *
+ * @param {{ id: string, actor: { id: string }, document: object }[]} controlledTokens
+ * @param {{id: string, getFlag: function, setFlag: function, unsetFlag: function}} user
+ * @param {function} getSetting
+ * @param { { populator: { chbSetMacros: function } } } getSetting
+ * @returns True, if hotbar has been loaded.
+ */
+export function loadCustomHotbar(user, controlledTokens, getSetting, customHotbar) {
+    if (controlledTokens.length > 1) {
+        debug("Not loading any hotbar, more than one token selected.", controlledTokens);
+        return false;
+    }
+    if (isUpdatingCustomHotbar) {
+        debug("Already loading the Token Hotbar onto the Custom Hotbar");
+        return false;
+    }
+
+    const documentWithHotbar = user;
+    const entity = determineEntityForHotbar(controlledTokens, user, getSetting);
+    const hotbarForToken = documentWithHotbar.getFlag(TH.name, `hotbar.${entity.id}`);
+
+    debug(`Loading Custom Hotbar for ${entity.constructor.name} from document`, { documentWithHotbar, entity, hotbarForToken });
+
+    isUpdatingCustomHotbar = true;
+    customHotbar.populator.chbSetMacros(hotbarForToken || {})
+        .then(() => isUpdatingCustomHotbar = false);
+
+    return true;
+}

@@ -2,10 +2,11 @@ import { TH, log, debug } from './constants.mjs';
 
 export const settingKeys = {
     alwaysUseActor: 'alwaysUseActor',
-    debugMode: 'debugMode'
+    debugMode: 'debugMode',
+    useCustomHotbar: 'useCustomHotbar'
 };
 
-export function registerModuleSettings(settings) {
+export function registerModuleSettings(settings, hasCustomHotbar) {
     settings.register(TH.name, settingKeys.alwaysUseActor, {
         name: `${TH.name}.settings.${settingKeys.alwaysUseActor}.name`,
         hint: `${TH.name}.settings.${settingKeys.alwaysUseActor}.hint`,
@@ -23,6 +24,23 @@ export function registerModuleSettings(settings) {
         default: false,
         type: Boolean,
         onChange: () => setDebugging(settings)
+    });
+
+    log("Has Custom Hotbar?", hasCustomHotbar);
+    settings.register(TH.name, settingKeys.useCustomHotbar, {
+        name: `${TH.name}.settings.${settingKeys.useCustomHotbar}.name`,
+        hint: `${TH.name}.settings.${settingKeys.useCustomHotbar}.hint`,
+        scope: 'client',
+        config: hasCustomHotbar, // only show the setting if Custom Hotbar is enabled
+        default: false,
+        type: Boolean,
+        onChange: (useCustomHotbar) => {
+            // if the setting is somehow set to true, but Custom Hotbar is not enabled
+            // then set the setting to false again
+            if (useCustomHotbar && !hasCustomHotbar) {
+                settings.set(TH.name, settingKeys.useCustomHotbar, false);
+            }
+        }
     });
 
     setDebugging(settings);

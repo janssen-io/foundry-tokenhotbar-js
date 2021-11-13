@@ -5,6 +5,10 @@
                 "name": "Toujours lier à l’acteur",
                 "hint": "Lie la barre d’accès rapide à l’acteur même si le token est délié."
             },
+            "useCustomHotbar": {
+                "name": "Utiliser une barre d’accès custom (beta)",
+                "hint": "⚠ Nécessite l’utilisation du Module Norc's Custom Hotbar."
+            },
             "debugMode": {
                 "name": "Mode débugage",
                 "hint": "Ouvrir la console pour voir le code."

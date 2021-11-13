@@ -5,6 +5,10 @@
                 "name": "Immer mit dem Charakter verknüpfen",
                 "hint": "Verknüpfe die Token Hotbar mit dem Charakter, auch wenn dieser nicht mit dem Token verknüpft ist."
             },
+            "useCustomHotbar": {
+                "name": "Benutze Custom Hotbar (beta)",
+                "hint": "⚠ Erfordert Norc's Custom Hotbar Module."
+            },
             "debugMode": {
                 "name": "Debug Mode",
                 "hint": "Ausführlich(verbosse) in das log der console schreiben."
