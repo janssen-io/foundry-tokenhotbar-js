@@ -1,7 +1,7 @@
 <h1 align="center">Token Hotbar</h1>
 <p align="center">
-<img src="https://img.shields.io/github/downloads-pre/janssen-io/foundry-tokenhotbar-js/v1.1.2/token-hotbar.zip?label=v1.1.2" alt="v1.1.2 downloads" />
-<img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/janssen-io/foundry-tokenhotbar-js/releases/download/v1.1.2/module.json" alt="Supported Foundry VTT version"/>
+<img src="https://img.shields.io/github/downloads-pre/janssen-io/foundry-tokenhotbar-js/v1.2.0/token-hotbar.zip?label=v1.2.0" alt="v1.2.0 downloads" />
+<img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/janssen-io/foundry-tokenhotbar-js/releases/download/v1.2.0/module.json" alt="Supported Foundry VTT version"/>
 </p>
 
 This module provides a unique hotbar for every token. If the token is linked to an actor (for player characters), then all tokens of that actor will have the same hotbar.
