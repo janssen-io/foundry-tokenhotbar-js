@@ -1,7 +1,7 @@
 <h1 align="center">Token Hotbar</h1>
 <p align="center">
-<img src="https://img.shields.io/github/downloads-pre/janssen-io/foundry-tokenhotbar-js/v1.2.0/token-hotbar.zip?label=v1.2.0" alt="v1.2.0 downloads" />
-<img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/janssen-io/foundry-tokenhotbar-js/releases/download/v1.2.0/module.json" alt="Supported Foundry VTT version"/>
+<img src="https://img.shields.io/github/downloads-pre/janssen-io/foundry-tokenhotbar-js/v1.3.0/token-hotbar.zip?label=v1.3.0" alt="v1.3.0 downloads" />
+<img src="https://img.shields.io/endpoint?url=https://foundryshields.com/version?url=https://github.com/janssen-io/foundry-tokenhotbar-js/releases/download/v1.3.0/module.json" alt="Supported Foundry VTT version"/>
 </p>
 
 This module provides a unique hotbar for every token. If the token is linked to an actor (for player characters), then all tokens of that actor will have the same hotbar.
@@ -20,6 +20,9 @@ All pages of the hotbar will change depending on the token you have selected.
 
 ### Use an additional hotbar
 Since version [1.2.0](https://github.com/janssen-io/foundry-tokenhotbar-js/releases/v1.2.0), this module supports using [Norc's Custom Hotbar](https://github.com/Norc/foundry-custom-hotbar) to place the Token Hotbar on. You can enable this in the settings.
+
+### Enable the Token Hotbar per client
+Since version [1.3.0](https://github.com/janssen-io/foundry-tokenhotbar-js/releases/v1.3.0), this module supports enabling and disabling the Token Hotbar per client. For example, the GM can use this to have different hotbars for different tokens. But the players might want a single hotbar as they usually control a single token anyway.
 
 ### Shared Token Hotbar
 Hotbar's can be shared manually via the provided macro. A GM can run this macro and select for which

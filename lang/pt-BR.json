@@ -6,12 +6,16 @@
                 "hint": "Vincule a barra de atalho à um token mesmo desvinculádo a um Ator."
             },
             "useCustomHotbar": {
-                "name": "Usar Barra de atalho personalizada (beta)",
+                "name": "Usar Barra de atalho personalizada",
                 "hint": "⚠ Necessário o módulo Norc's Custom Hotbar."
             },
             "debugMode": {
                 "name": "Modo Debug",
                 "hint": "envia mensagens para o console de Debug."
+            },
+            "enableHotbar": {
+                "name": "Enable Token Hotbar",
+                "hint": "Enable the Token Hotbar on this client."
             }
         }
     }

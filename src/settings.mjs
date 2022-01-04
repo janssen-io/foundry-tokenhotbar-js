@@ -3,7 +3,8 @@ import { TH, log, debug } from './constants.mjs';
 export const settingKeys = {
     alwaysUseActor: 'alwaysUseActor',
     debugMode: 'debugMode',
-    useCustomHotbar: 'useCustomHotbar'
+    useCustomHotbar: 'useCustomHotbar',
+    enableHotbar: 'enableHotbar',
 };
 
 export function registerModuleSettings(settings, hasCustomHotbar) {
@@ -41,6 +42,15 @@ export function registerModuleSettings(settings, hasCustomHotbar) {
                 settings.set(TH.name, settingKeys.useCustomHotbar, false);
             }
         }
+    });
+
+    settings.register(TH.name, settingKeys.enableHotbar, {
+        name: `${TH.name}.settings.${settingKeys.enableHotbar}.name`,
+        hint: `${TH.name}.settings.${settingKeys.enableHotbar}.hint`,
+        scope: 'client',
+        config: true,
+        default: true,
+        type: Boolean
     });
 
     setDebugging(settings);

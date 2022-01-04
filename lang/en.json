@@ -6,12 +6,16 @@
                 "hint": "Link the token hotbar to the actor even if the token is unlinked."
             },
             "useCustomHotbar": {
-                "name": "Use Custom Hotbar (beta)",
+                "name": "Use Custom Hotbar",
                 "hint": "⚠ Requires Norc's Custom Hotbar module."
             },
             "debugMode": {
                 "name": "Debug Mode",
                 "hint": "Log verbosely to the console."
+            },
+            "enableHotbar": {
+                "name": "Enable Token Hotbar",
+                "hint": "Enable the Token Hotbar on this client."
             }
         }
     }

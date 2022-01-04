@@ -6,12 +6,16 @@
                 "hint": "Conectați Token Hotbar-ul la actor chiar dacă jetonul nu este conectat la actorul lui."
             },
             "useCustomHotbar": {
-                "name": "Utilisați Custom Hotbar (beta)",
+                "name": "Utilisați Custom Hotbar",
                 "hint": "⚠ Această setare necesită modul 'Custom Hotbar' a lui Norc."
             },
             "debugMode": {
                 "name": "Mod Debug",
                 "hint": "Token Hotbar va scrie mesaje detaliate în consolă."
+            },
+            "enableHotbar": {
+                "name": "Permite Token Hotbar",
+                "hint": "Permite Token Hotbar-ul la acest client."
             }
         }
     }

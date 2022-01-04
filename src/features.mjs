@@ -186,6 +186,9 @@ export function loadCustomHotbar(user, controlledTokens, getSetting, customHotba
 
     debug(`Loading Custom Hotbar for ${entity.constructor.name} from document`, { documentWithHotbar, entity, hotbarForToken });
 
+    // We set 'isUpdatingCustomHotbar' to prevent the Token Hotbar from updating itself when
+    // the flags from Custom Hotbar are updated (unset and then set).
+    // When we do not do this, the Token Hotbar is cleared while loading it.
     isUpdatingCustomHotbar = true;
     customHotbar.populator.chbSetMacros(hotbarForToken || {})
         .then(() => isUpdatingCustomHotbar = false);

@@ -1,4 +1,4 @@
-import { TH, log } from './src/constants.mjs';
+import { TH, log, warn } from './src/constants.mjs';
 import {
     saveHotbar,
     updateHotbar,
@@ -18,6 +18,12 @@ Hooks.on('init', () => {
 });
 
 Hooks.on('ready', () => {
+    const getSetting = getModuleSettings(game.settings);
+    if (getSetting(settingKeys.useCustomHotbar) && !ui.customHotbar) {
+        warn('Settings use Custom Hotbar, but Custom Hotbar is installed or enabled. Using standard hotbar instead.')
+        game.settings.set(TH.name, settingKeys.useCustomHotbar, false);
+    }
+
     saveUserHotbarOnFirstUse(game.user, game.user.data.hotbar);
 });
 
@@ -32,10 +38,14 @@ Hooks.on('ready', () => {
 //  - It's sent to other clients
 //  - There's no other hooks that contain the hotbar data that we need
 Hooks.on("updateUser", (user, data) => {
-    var controlledTokens = game.canvas.tokens.controlled;
+    const controlledTokens = game.canvas.tokens.controlled;
     const getSetting = getModuleSettings(game.settings);
 
-    if (getSetting(settingKeys.useCustomHotbar)) {
+    if (!getSetting(settingKeys.enableHotbar)) {
+        return;
+    }
+
+    if (getSetting(settingKeys.useCustomHotbar) && ui.customHotbar) {
         updateCustomHotbar(controlledTokens, game.user, user, data, getSetting, ui.customHotbar);
     } else {
         updateHotbar(controlledTokens, game.user, user, data, getSetting);
@@ -53,6 +63,10 @@ Hooks.on("updateUser", (user, data) => {
 
 let controlTokenTimeout;
 Hooks.on("controlToken", (object, isControlled) => {
+    if (!getSetting(settingKeys.enableHotbar)) {
+        return;
+    }
+
     if (controlTokenTimeout) {
         window.clearTimeout(controlTokenTimeout);
     }
@@ -61,10 +75,7 @@ Hooks.on("controlToken", (object, isControlled) => {
         const controlledTokens = game.canvas.tokens.controlled;
         const getSetting = getModuleSettings(game.settings);
 
-        if (getSetting(settingKeys.useCustomHotbar)) {
-            if (!ui.customHotbar) {
-                throw new Error('Custom Hotbar is not enabled or is no longer located in `ui.customHotbar`');
-            }
+        if (getSetting(settingKeys.useCustomHotbar) && ui.customHotbar) {
             loadCustomHotbar(game.user, controlledTokens, getSetting, ui.customHotbar);
         } else {
             if(loadHotbar(game.user, controlledTokens, getSetting)) {
