@@ -63,6 +63,7 @@ Hooks.on("updateUser", (user, data) => {
 
 let controlTokenTimeout;
 Hooks.on("controlToken", (object, isControlled) => {
+    const getSetting = getModuleSettings(game.settings);
     if (!getSetting(settingKeys.enableHotbar)) {
         return;
     }
@@ -73,7 +74,6 @@ Hooks.on("controlToken", (object, isControlled) => {
 
     controlTokenTimeout = window.setTimeout(() => {
         const controlledTokens = game.canvas.tokens.controlled;
-        const getSetting = getModuleSettings(game.settings);
 
         if (getSetting(settingKeys.useCustomHotbar) && ui.customHotbar) {
             loadCustomHotbar(game.user, controlledTokens, getSetting, ui.customHotbar);
