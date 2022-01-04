@@ -19,7 +19,7 @@ All pages of the hotbar will change depending on the token you have selected.
 </p>
 
 ### Use an additional hotbar
-Since version [1.2.0](https://github.com/janssen-io/foundry-tokenhotbar-js/releases/v1.2.0), this module supports using [Norc's Custom Hotbar](https://github.com/Norc/foundry-custom-hotbar) to place the Token Hotbar on. You can enable this in the settings.
+Since version [1.3.0](https://github.com/janssen-io/foundry-tokenhotbar-js/releases/v1.3.0), this module supports using [Norc's Custom Hotbar](https://github.com/Norc/foundry-custom-hotbar) to place the Token Hotbar on. You can enable this in the settings.
 
 ### Enable the Token Hotbar per client
 Since version [1.3.0](https://github.com/janssen-io/foundry-tokenhotbar-js/releases/v1.3.0), this module supports enabling and disabling the Token Hotbar per client. For example, the GM can use this to have different hotbars for different tokens. But the players might want a single hotbar as they usually control a single token anyway.
