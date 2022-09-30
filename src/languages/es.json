@@ -1,0 +1,22 @@
+{
+	"token-hotbar": {
+		"settings": {
+			"alwaysUseActor": {
+				"name": "Siempre enlazar al actor",
+				"hint": "Enlazar la Barra de Tokens al actor incluso si el token no esta asociado."
+			},
+			"useCustomHotbar": {
+				"name": "Utilizar barra customizable",
+				"hint": "⚠ Requiere el módulo Norc's Custom Hotbar."
+			},
+			"debugMode": {
+				"name": "Modo depuración",
+				"hint": "Registro detallado en consola."
+			},
+			"enableHotbar": {
+				"name": "Activa Token Hotbar",
+				"hint": "Activa la Barra de Tokens en este cliente."
+			}
+		}
+	}
+}

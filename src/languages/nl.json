@@ -1,0 +1,22 @@
+{
+	"token-hotbar": {
+		"settings": {
+			"alwaysUseActor": {
+				"name": "Altijd aan personage koppelen",
+				"hint": "Koppel de Token Hotbar aan de acteur ook wanneer de token niet gekoppeld is."
+			},
+			"useCustomHotbar": {
+				"name": "Gebruik Custom Hotbar",
+				"hint": "⚠ Vereist dat de module 'Custom Hotbar' van Norc is geïnstalleerd."
+			},
+			"debugMode": {
+				"name": "Debug Modus",
+				"hint": "Schrijf gedetailleerde berichten naar de ontwikkelaarsconsole."
+			},
+			"enableHotbar": {
+				"name": "Activeer Token Hotbar",
+				"hint": "Activeer de Token Hotbar op deze client."
+			}
+		}
+	}
+}

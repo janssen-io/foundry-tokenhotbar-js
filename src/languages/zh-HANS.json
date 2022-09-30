@@ -1,0 +1,22 @@
+{
+	"token-hotbar": {
+		"settings": {
+			"alwaysUseActor": {
+				"name": "总是链接到actor。",
+				"hint": "即使token没有被快捷栏链接，依旧将快捷栏链接到token对应的actor上。"
+			},
+			"useCustomHotbar": {
+				"name": "使用自定义快捷栏",
+				"hint": "⚠ 需要开启Norc's Custom Hotbar模组。"
+			},
+			"debugMode": {
+				"name": "Debug模式",
+				"hint": "完整日志见控制台。"
+			},
+			"enableHotbar": {
+				"name": "Enable Token Hotbar",
+				"hint": "Enable the Token Hotbar on this client."
+			}
+		}
+	}
+}

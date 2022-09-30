@@ -1,0 +1,22 @@
+{
+	"token-hotbar": {
+		"settings": {
+			"alwaysUseActor": {
+				"name": "항상 액터와 연결",
+				"hint": "토큰이 액터와 연동되지 않아도 단축바를 토큰에 연결한다."
+			},
+			"useCustomHotbar": {
+				"name": "커스텀 단축바 사용",
+				"hint": "⚠ Norc의 Custom Hotbar 모듈을 필요로 함."
+			},
+			"debugMode": {
+				"name": "디버그 모드",
+				"hint": "콘솔에 자세하게 기록된다."
+			},
+			"enableHotbar": {
+				"name": "Enable Token Hotbar",
+				"hint": "Enable the Token Hotbar on this client."
+			}
+		}
+	}
+}
