@@ -1,0 +1,22 @@
+{
+	"token-hotbar": {
+		"settings": {
+			"alwaysUseActor": {
+				"name": "Immer mit dem Charakter verknüpfen",
+				"hint": "Verknüpfe die Token Hotbar mit dem Charakter, auch wenn dieser nicht mit dem Token verknüpft ist."
+			},
+			"useCustomHotbar": {
+				"name": "Benutze Custom Hotbar",
+				"hint": "⚠ Erfordert Norc's Custom Hotbar Module."
+			},
+			"debugMode": {
+				"name": "Debug Mode",
+				"hint": "Ausführlich(verbosse) in das log der console schreiben."
+			},
+			"enableHotbar": {
+				"name": "Aktiviere Token Hotbar",
+				"hint": "Aktiviere Token Hotbar auf diesem Client."
+			}
+		}
+	}
+}

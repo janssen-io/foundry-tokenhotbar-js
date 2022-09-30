@@ -1,0 +1,22 @@
+{
+	"token-hotbar": {
+		"settings": {
+			"alwaysUseActor": {
+				"name": "Zawsze łącz z aktorem",
+				"hint": "Połącz pasek tokenu z aktorem zawsze, nawet jeśli token i aktor nie są połączeni."
+			},
+			"useCustomHotbar": {
+				"name": "Użyj „Custom Hotbar”",
+				"hint": "⚠ Wymaga modułu „Custom Hotbar” autorstwa Norc."
+			},
+			"debugMode": {
+				"name": "Tryb debugowania",
+				"hint": "Wysyłaj więcej zapisów do konsoli."
+			},
+			"enableHotbar": {
+				"name": "Enable Token Hotbar",
+				"hint": "Enable the Token Hotbar on this client."
+			}
+		}
+	}
+}
